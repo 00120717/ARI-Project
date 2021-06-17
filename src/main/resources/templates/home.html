@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<script>
+		function readFile(input) {
+			  let file = input.files[0];
+	
+			  let reader = new FileReader();
+	
+			  reader.readAsText(file);
+			  
+	
+			  reader.onload = function() {
+				var output = document.getElementById('textA_insert');
+				output.placeholder = reader.result
+			    console.log(reader.result);
+			  };
+	
+			  reader.onerror = function() {
+			    console.log(reader.error);
+			  };
+	
+			}
+	</script>
+	<form name="formulario" method="post" action="/send.php" enctype="multipart/form-data">
+  		<!-- ¡No olvides el enctype! -->
+ 		 <!-- Campo de selección de archivo -->
+  		<input type="file" name="adjunto" accept=".xml,.txt,.json" onchange='readFile(this)'/>
+	</form>
+	<textarea rows="20" cols="40" readonly="yes" id="textA_insert"></textarea>
+</body>
+</html>
