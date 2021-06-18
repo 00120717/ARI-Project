@@ -2,7 +2,11 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Proyecto ARI 2021</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://code.jquery.com/jquery-3.3.1.slim.min.js">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js">
 </head>
 <body>
 	<script>
@@ -49,25 +53,51 @@
 			}
 		} 
 	</script>
-	<form name="formulario" method="post" action="/send.php" enctype="multipart/form-data">
-  		<!-- ¡No olvides el enctype! -->
- 		 <!-- Campo de selección de archivo -->
-  		<input type="file" name="adjunto" accept=".xml,.txt,.json" onchange='readFile(this,"textA_insert"),chooseFormat(this)'/>
-  		
-  		<input type="radio" id="txt" name="format" value="txt">
-		<label for="txt">TXT</label><br>
-		<input type="radio" id="xml" name="format" value="xml">
-		<label for="XML">XML</label><br>
-		<input type="radio" id="json" name="format" value="json">
-		<label for="JSON">JSON</label>
-		
-		<div id="delimitadorDiv" hidden="true">
-			<label for="delin">DELIMITADOR</label>
-			<input type="text" id="delim" name="delimitador" value=";">
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="card">
+			<div class="card-body">
+				<form name="formulario" method="post" action="/" enctype="multipart/form-data">
+	  		
+	  		<input type="file" name="adjunto" accept=".xml,.txt,.json" onchange='readFile(this,"textA_insert"),chooseFormat(this)' /><br>
+	  		<div class="row">
+	  			<div class="col-sm " >
+			  		<input type="radio" id="txt" name="format" value="txt">
+					<label for="txt">TXT</label><br>
+	  			</div>
+	  			<div class="col-sm">
+	  				<input type="radio" id="xml" name="format" value="xml">
+					<label for="XML">XML</label><br>
+	  			</div>
+	  			<div class="col-sm">
+	  				<input type="radio" id="json" name="format" value="json">
+					<label for="JSON">JSON</label>
+	  			</div>
+	  		</div>
+			
+			<div id="delimitadorDiv" hidden="true">
+				<label for="delin">DELIMITADOR</label>
+				<input type="text" id="delim" name="delimitador" value=";">
+			</div>
+			<br>
+			<input type="submit" class="btn btn-outline-success" value="CONVERTIR"><br>
+		</form>	
+		<textarea rows="15" cols="80" readonly="yes" id="textA_insert" class="border border-success"></textarea>	
+			</div>
 		</div>
-	</form>	
-	<textarea rows="20" cols="40" readonly="yes" id="textA_insert"></textarea>
-	<textarea rows="20" cols="40" readonly="yes" id="textA_generated"></textarea>
+		
+		</div>
+	<div class="col-sm-6">
+		<div class="card">
+			<div class="card-body">
+				<textarea rows="15" cols="80" readonly="yes" id="textA_generated" class="border border-primary align-middle" ></textarea><br>
+				<button class="btn btn-outline-primary align-middle position-absolute top-50 start-50"> Download</button><br>	
+			</div>
+		</div>
+		
+	</div>
+    </div>
+	
 	
 </body>
 </html>
