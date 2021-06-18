@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Proyecto ARI 2021</title>
+<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	<script>
+		function readFile(input, id) {
+			  let file = input.files[0];
+
+			  let reader = new FileReader();
+
+			  reader.readAsText(file);
+
+
+			  reader.onload = function() {
+				var output = document.getElementById(id);
+				output.placeholder = reader.result
+			    console.log(reader.result);
+			  };
+
+			  reader.onerror = function() {
+			    console.log(reader.error);
+			  };
+
+			}
+		function chooseFormat(input){
+			let file = input.files[0];
+			console.log(file.type);
+
+			if(file.type == 'text/plain'){
+				document.getElementById("txt").disabled = true;
+				document.getElementById("xml").disabled = false;
+				document.getElementById("json").disabled = false;
+				document.getElementById("delimitadorDiv").hidden = true;
+			}
+			if(file.type == 'text/xml'){
+				document.getElementById("txt").disabled = false;
+				document.getElementById("xml").disabled = true;
+				document.getElementById("json").disabled = true;
+				document.getElementById("delimitadorDiv").hidden = false;
+			}
+			if(file.type == 'text/xml'){
+				document.getElementById("txt").disabled = false;
+				document.getElementById("xml").disabled = true;
+				document.getElementById("json").disabled = true;
+				document.getElementById("delimitadorDiv").hidden = false;
+			}
+		}
+	</script>
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+			<div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
+				<form name="formulario" method="post" action="/" enctype="multipart/form-data" class="login100-form validate-form flex-sb flex-w" >
+					<span class="login100-form-title p-b-53">
+						Generar archivos
+					</span>
+					
+					<input type="file" name="adjunto" accept=".xml,.txt,.json" onchange='readFile(this,"textA_insert"),chooseFormat(this)' class="form-control form-control-lg" id="formFileLg"/><br>
+					
+					
+					<div class="100">
+						<div class="txt1">
+							Seleccione la opción a convertir:
+						</div>
+						<div class="row">
+				  			<div class="col-sm " >
+						  		<input type="radio" id="txt" name="format" value="txt">
+								<label for="txt">TXT</label><br>
+				  			</div>
+				  			<div class="col-sm">
+				  				<input type="radio" id="xml" name="format" value="xml">
+								<label for="XML">XML</label><br>
+				  			</div>
+				  			<div class="col-sm">
+				  				<input type="radio" id="json" name="format" value="json">
+								<label for="JSON">JSON</label>
+				  			</div>
+			  			</div>
+			  			<div id="delimitadorDiv" hidden="true">
+							<label for="delin">DELIMITADOR</label>
+							<input type="text" id="delim" name="delimitador" value=";">
+						</div>
+					</div>
+					
+			  		<div class="container-login100-form-btn m-t-17">
+						<button class="login100-form-btn"> CONVERTIR</button><br>
+					</div>
+				</form>
+				<div class="wrap-input100 m-t-20" >
+					<textarea id="textA_insert" class="input100" style="height: 10em;"></textarea>
+				</div>
+			</div>
+			<br>
+			<div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33 m-t-20">
+				<span class="login100-form-title p-b-53">
+					Archivo Generado
+				</span>
+				<div class="wrap-input100" >
+					<textarea id="textA_generated" class="input100" style="height: 10em;"></textarea>
+				</div>
+				<div class="container-login100-form-btn m-t-17">
+					<button class="login100-form-btn"> DESCARGAR</button><br>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+		
+	
+    
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+</body>
+</html>

@@ -22,7 +22,7 @@ public class MainController {
 	public ModelAndView initMain() {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("jsontext",convert.TextToJson(""));
-		mav.setViewName("index");
+		mav.setViewName("home2");
 		return mav;
 	}
 
