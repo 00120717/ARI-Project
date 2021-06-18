@@ -14,11 +14,14 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
-public class xml_to_delim {
+/**
+ * xml/json to txt
+ **/
+public class Convert_to_delim {
 
     List<Cliente> list_clientes = new ArrayList<>();
 
-    //read data
+    //read data xml
     public void readXML() {
         try {
             SAXBuilder builder = new SAXBuilder();
@@ -45,20 +48,22 @@ public class xml_to_delim {
             }
 
         } catch (JDOMException | IOException ex) {
-            Logger.getLogger(xml_to_delim.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Convert_to_delim.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void saveDocByDelim(){
+    //save data txt
+    public void saveDocByDelim(char delim) {
         try {
             BufferedWriter out = new BufferedWriter(new FileWriter("file.txt"));
             for (int i = 0; i < list_clientes.size(); i++) {
-                out.write(list_clientes.get(i).getDocumento() + ";" + list_clientes.get(i).getPrimer_nombre() + ";" + list_clientes.get(i).getApellido() + ";"
-                        + list_clientes.get(i).getCredit_card() + ";" + list_clientes.get(i).getTipo() + ";" + list_clientes.get(i).getTelefono() + ";");
+                out.write(list_clientes.get(i).getDocumento() + delim + list_clientes.get(i).getPrimer_nombre() + delim + list_clientes.get(i).getApellido() + delim
+                        + list_clientes.get(i).getCredit_card() + delim + list_clientes.get(i).getTipo() + delim + list_clientes.get(i).getTelefono());
                 out.newLine();
             }
             out.close();
-        } catch (IOException e) {}
+        } catch (IOException e) {
+        }
     }
 
 }
