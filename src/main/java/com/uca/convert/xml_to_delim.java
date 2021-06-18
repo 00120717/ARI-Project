@@ -1,6 +1,8 @@
 package com.uca.convert;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 import java.util.logging.Level;
@@ -45,6 +47,18 @@ public class xml_to_delim {
         } catch (JDOMException | IOException ex) {
             Logger.getLogger(xml_to_delim.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void saveDocByDelim(){
+        try {
+            BufferedWriter out = new BufferedWriter(new FileWriter("file.txt"));
+            for (int i = 0; i < list_clientes.size(); i++) {
+                out.write(list_clientes.get(i).getDocumento() + ";" + list_clientes.get(i).getPrimer_nombre() + ";" + list_clientes.get(i).getApellido() + ";"
+                        + list_clientes.get(i).getCredit_card() + ";" + list_clientes.get(i).getTipo() + ";" + list_clientes.get(i).getTelefono() + ";");
+                out.newLine();
+            }
+            out.close();
+        } catch (IOException e) {}
     }
 
 }
