@@ -16,12 +16,13 @@ import com.uca.convert.TxtToJson;
 
 @Controller
 public class MainController {
-
+	
+	TxtToJson convert = new TxtToJson();
 	@RequestMapping("/")
 	public ModelAndView initMain() {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("jsontext",convert.TextToJson(""));
-		mav.setViewName("home");
+		mav.setViewName("index");
 		return mav;
 	}
 
