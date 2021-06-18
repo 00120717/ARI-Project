@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>Proyecto ARI 2021</title>
@@ -12,27 +12,27 @@
 	<script>
 		function readFile(input, id) {
 			  let file = input.files[0];
-	
+
 			  let reader = new FileReader();
-	
+
 			  reader.readAsText(file);
-			  
-	
+
+
 			  reader.onload = function() {
 				var output = document.getElementById(id);
 				output.placeholder = reader.result
 			    console.log(reader.result);
 			  };
-	
+
 			  reader.onerror = function() {
 			    console.log(reader.error);
 			  };
-	
+
 			}
 		function chooseFormat(input){
 			let file = input.files[0];
 			console.log(file.type);
-			
+
 			if(file.type == 'text/plain'){
 				document.getElementById("txt").disabled = true;
 				document.getElementById("xml").disabled = false;
@@ -51,14 +51,14 @@
 				document.getElementById("json").disabled = true;
 				document.getElementById("delimitadorDiv").hidden = false;
 			}
-		} 
+		}
 	</script>
 	<div class="row">
 		<div class="col-sm-6">
 			<div class="card">
 			<div class="card-body">
 				<form name="formulario" method="post" action="/" enctype="multipart/form-data">
-	  		
+
 	  		<input type="file" name="adjunto" accept=".xml,.txt,.json" onchange='readFile(this,"textA_insert"),chooseFormat(this)' /><br>
 	  		<div class="row">
 	  			<div class="col-sm " >
@@ -74,30 +74,30 @@
 					<label for="JSON">JSON</label>
 	  			</div>
 	  		</div>
-			
+
 			<div id="delimitadorDiv" hidden="true">
 				<label for="delin">DELIMITADOR</label>
 				<input type="text" id="delim" name="delimitador" value=";">
 			</div>
 			<br>
 			<input type="submit" class="btn btn-outline-success" value="CONVERTIR"><br>
-		</form>	
-		<textarea rows="15" cols="80" readonly="yes" id="textA_insert" class="border border-success"></textarea>	
+		</form>
+		<textarea rows="15" cols="80" readonly="yes" id="textA_insert" class="border border-success"></textarea>
 			</div>
 		</div>
-		
+
 		</div>
 	<div class="col-sm-6">
 		<div class="card">
 			<div class="card-body">
 				<textarea rows="15" cols="80" readonly="yes" id="textA_generated" class="border border-primary align-middle" ></textarea><br>
-				<button class="btn btn-outline-primary align-middle position-absolute top-50 start-50"> Download</button><br>	
+				<button class="btn btn-outline-primary align-middle position-absolute top-50 start-50"> Download</button><br>
 			</div>
 		</div>
-		
+
 	</div>
     </div>
-	
-	
+
+
 </body>
 </html>
