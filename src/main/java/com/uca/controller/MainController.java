@@ -22,9 +22,16 @@ public class MainController {
 	TxtToJson convert = new TxtToJson();
 	@RequestMapping("/")
 
-	public ModelAndView initMain() throws IOException, ParseException {
+	public ModelAndView initMain() throws Exception {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("jsontext",convert.TextToJson(""));
+		
+		TxtToXml conv = new TxtToXml();
+		TxtToJson cvt = new TxtToJson();
+		/*conv.generate("03423423;rober;fuentes;04534534532;GOLD;2343243523\n" + 
+				"353452323;alberto;alfaro;0534534523;PLATINUM;3423523432", ';');*/
+		System.out.println(cvt.TextToJson("03423423;rober;fuentes;04534534532;GOLD;2343243523\n" + 
+				"353452323;alberto;alfaro;0534534523;PLATINUM;3423523432", ';'));
+		
 		mav.setViewName("home2");
 		return mav;
 	}
