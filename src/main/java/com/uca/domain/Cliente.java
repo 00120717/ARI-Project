@@ -8,7 +8,6 @@ public class Cliente {
     private String credit_card;
     private String tipo;
     private String telefono;
-    private String token;
 
     public String getDocumento() {
         return documento;
@@ -58,11 +57,4 @@ public class Cliente {
         this.telefono = telefono;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
 }
