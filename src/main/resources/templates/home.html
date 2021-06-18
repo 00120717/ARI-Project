@@ -6,7 +6,7 @@
 </head>
 <body>
 	<script>
-		function readFile(input) {
+		function readFile(input, id) {
 			  let file = input.files[0];
 	
 			  let reader = new FileReader();
@@ -15,7 +15,7 @@
 			  
 	
 			  reader.onload = function() {
-				var output = document.getElementById('textA_insert');
+				var output = document.getElementById(id);
 				output.placeholder = reader.result
 			    console.log(reader.result);
 			  };
@@ -25,12 +25,49 @@
 			  };
 	
 			}
+		function chooseFormat(input){
+			let file = input.files[0];
+			console.log(file.type);
+			
+			if(file.type == 'text/plain'){
+				document.getElementById("txt").disabled = true;
+				document.getElementById("xml").disabled = false;
+				document.getElementById("json").disabled = false;
+				document.getElementById("delimitadorDiv").hidden = true;
+			}
+			if(file.type == 'text/xml'){
+				document.getElementById("txt").disabled = false;
+				document.getElementById("xml").disabled = true;
+				document.getElementById("json").disabled = true;
+				document.getElementById("delimitadorDiv").hidden = false;
+			}
+			if(file.type == 'text/xml'){
+				document.getElementById("txt").disabled = false;
+				document.getElementById("xml").disabled = true;
+				document.getElementById("json").disabled = true;
+				document.getElementById("delimitadorDiv").hidden = false;
+			}
+		} 
 	</script>
 	<form name="formulario" method="post" action="/send.php" enctype="multipart/form-data">
   		<!-- ¡No olvides el enctype! -->
  		 <!-- Campo de selección de archivo -->
-  		<input type="file" name="adjunto" accept=".xml,.txt,.json" onchange='readFile(this)'/>
-	</form>
+  		<input type="file" name="adjunto" accept=".xml,.txt,.json" onchange='readFile(this,"textA_insert"),chooseFormat(this)'/>
+  		
+  		<input type="radio" id="txt" name="format" value="txt">
+		<label for="txt">TXT</label><br>
+		<input type="radio" id="xml" name="format" value="xml">
+		<label for="XML">XML</label><br>
+		<input type="radio" id="json" name="format" value="json">
+		<label for="JSON">JSON</label>
+		
+		<div id="delimitadorDiv" hidden="true">
+			<label for="delin">DELIMITADOR</label>
+			<input type="text" id="delim" name="delimitador" value=";">
+		</div>
+	</form>	
 	<textarea rows="20" cols="40" readonly="yes" id="textA_insert"></textarea>
+	<textarea rows="20" cols="40" readonly="yes" id="textA_generated"></textarea>
+	
 </body>
 </html>
