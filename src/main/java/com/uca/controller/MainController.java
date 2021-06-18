@@ -19,17 +19,13 @@ import com.uca.convert.TxtToXml;
 @Controller
 public class MainController {
 
+	TxtToJson convert = new TxtToJson();
 	@RequestMapping("/")
 
 	public ModelAndView initMain() throws IOException, ParseException {
 		ModelAndView mav = new ModelAndView();
-		//mav.addObject("jsontext",convert.TextToJson(""));
-		mav.setViewName("home");
-
-		Convert_to_delim c = new Convert_to_delim();
-		//c.jsonToTxt("s",';');
-
-
+		mav.addObject("jsontext",convert.TextToJson(""));
+		mav.setViewName("home2");
 		return mav;
 	}
 
