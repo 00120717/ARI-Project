@@ -1,9 +1,6 @@
 package com.uca.convert;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,6 +10,10 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  * xml/json to txt
@@ -21,18 +22,34 @@ public class Convert_to_delim {
 
     List<Cliente> list_clientes = new ArrayList<>();
 
+    /**
+     * xml to txt
+     **/
+    public void xmlToTxt(String adjunto, char delim) {
+        readXML(adjunto);
+        saveDocByDelim(delim);
+    }
+
+    /**
+     * json to txt
+     **/
+    public void jsonToTxt(String adjunto, char delim) throws IOException, ParseException {
+        readJson(adjunto);
+        saveDocByDelim(delim);
+    }
+
+
     //read data xml
-    public void readXML() {
+    public void readXML(String adjunto) {
         try {
             SAXBuilder builder = new SAXBuilder();
-            File xml = new File("src/main/resources/clientes.xml");
+            File xml = new File(adjunto);
 
             Document document = builder.build(xml);
 
             Element root = document.getRootElement();
             List<Element> list = root.getChildren("cliente");
 
-            //System.out.println("Documento\tPrimer_nombre\tApellido");
             for (int i = 0; i < list.size(); i++) {
                 Cliente cliente = new Cliente();
                 Element clienteaux = list.get(i);
@@ -52,17 +69,41 @@ public class Convert_to_delim {
         }
     }
 
+    //read data json
+    public void readJson(String adjunto) throws IOException, ParseException {
+
+        JSONParser parser = new JSONParser();
+        JSONArray jsonArray = (JSONArray) parser.parse(new FileReader(
+                adjunto));
+
+        for (Object o : jsonArray) {
+            JSONObject person = (JSONObject) o;
+            Cliente cliente = new Cliente();
+
+            cliente.setDocumento((String) person.get("documento"));
+            cliente.setPrimer_nombre((String) person.get("primer_nombre"));
+            cliente.setApellido((String) person.get("apellido"));
+            cliente.setCredit_card((String) person.get("credit_card"));
+            cliente.setTipo((String) person.get("tipo"));
+            cliente.setTelefono((String) person.get("telefono"));
+
+            list_clientes.add(cliente);
+
+        }
+    }
+
     //save data txt
     public void saveDocByDelim(char delim) {
         try {
             BufferedWriter out = new BufferedWriter(new FileWriter("file.txt"));
-            for (int i = 0; i < list_clientes.size(); i++) {
-                out.write(list_clientes.get(i).getDocumento() + delim + list_clientes.get(i).getPrimer_nombre() + delim + list_clientes.get(i).getApellido() + delim
-                        + list_clientes.get(i).getCredit_card() + delim + list_clientes.get(i).getTipo() + delim + list_clientes.get(i).getTelefono());
+            for (Cliente list_cliente : list_clientes) {
+                out.write(list_cliente.getDocumento() + delim + list_cliente.getPrimer_nombre() + delim + list_cliente.getApellido() + delim
+                        + list_cliente.getCredit_card() + delim + list_cliente.getTipo() + delim + list_cliente.getTelefono());
                 out.newLine();
             }
             out.close();
         } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
