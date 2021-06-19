@@ -1,16 +1,10 @@
 package com.uca.convert;
 
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -50,7 +44,7 @@ public class TxtToXml {
                 Text nodeDocumentoValue = document.createTextNode(c[j]);
                 documentoNode.appendChild(nodeDocumentoValue);      
            
-                Element nombreNode = document.createElement("primer-nombre"); 
+                Element nombreNode = document.createElement("primer_nombre");
                 Text nodeNombreValue = document.createTextNode(c[j+1]);                
                 nombreNode.appendChild(nodeNombreValue);
                 
@@ -58,7 +52,7 @@ public class TxtToXml {
                 Text nodeApellidoValue = document.createTextNode(c[j+2]);                
                 apellidoNode.appendChild(nodeApellidoValue);
                 
-                Element cardNode = document.createElement("credit-card"); 
+                Element cardNode = document.createElement("credit_card");
                 Text nodeCardValue = document.createTextNode(c[j+3]);                
                 cardNode.appendChild(nodeCardValue);
                 
@@ -83,7 +77,7 @@ public class TxtToXml {
             //Generate XML
             Source source = new DOMSource(document);
             //Indicamos donde lo queremos almacenar
-            Result result = new StreamResult(new java.io.File("clientes.xml")); //nombre del archivo
+            Result result = new StreamResult(new java.io.File("src/main/resources/descargaArchivos/clientes.xml")); //nombre del archivo
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.transform(source, result);
             
