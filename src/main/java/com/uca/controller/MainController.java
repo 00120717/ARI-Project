@@ -3,25 +3,26 @@ package com.uca.controller;
 import com.uca.convert.Convert_to_delim;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import java.io.IOException;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonSyntaxException;
 import com.uca.convert.TxtToJson;
 import com.uca.convert.TxtToXml;
+
+import java.io.IOException;
 
 
 @Controller
 public class MainController {
 
-	TxtToJson convert = new TxtToJson();
-	@RequestMapping("/")
+	TxtToJson txtToJson = new TxtToJson();
+	TxtToXml txtToXml = new TxtToXml();
+	Convert_to_delim convert_to_delim = new Convert_to_delim();
 
+	FileController fileController = new FileController();
+
+	@RequestMapping("/")
 	public ModelAndView initMain() throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
@@ -29,18 +30,43 @@ public class MainController {
 		TxtToJson cvt = new TxtToJson();
 		/*conv.generate("03423423;rober;fuentes;04534534532;GOLD;2343243523\n" + 
 				"353452323;alberto;alfaro;0534534523;PLATINUM;3423523432", ';');*/
-		/*System.out.println(cvt.TextToJson("03423423;rober;fuentes;04534534532;GOLD;2343243523\n" + 
-				"353452323;alberto;alfaro;0534534523;PLATINUM;3423523432", ';'));*/
+		//System.out.println(cvt.TextToJson("03423423;rober;fuentes;04534534532;GOLD;2343243523\n" +
+		//		"353452323;alberto;alfaro;0534534523;PLATINUM;3423523432", ';'));
 		
 		mav.setViewName("home2");
 		return mav;
 	}
 
 	@RequestMapping("/send")
-	public ModelAndView formTextJson(@ModelAttribute String text ) {
+	public ModelAndView formTextJson(@RequestParam(value = "adjunto") MultipartFile file, @RequestParam(value = "format") String formatTo, @RequestParam(value = "delimitador") char delim) throws Exception {
 		ModelAndView mav = new ModelAndView();
+	//	System.out.println(format.getContentType() + " " + formatTo );
+
+		System.out.println(fileController.upload(file));
+
+		if (file.getContentType().equals("text/plain")){
+			if (formatTo.equals("xml")){
+				//System.out.println("hello txtToXml");
+				txtToXml.generate("03423423;rober;fuentes;04534534532;GOLD;2343243523\n" +
+						"353452323;alberto;alfaro;0534534523;PLATINUM;3423523432", ';');
+			}
+			else
+				//System.out.println("hello txtToJson");
+				txtToJson.TextToJson("03423423;rober;fuentes;04534534532;GOLD;2343243523\n" +
+						"353452323;alberto;alfaro;0534534523;PLATINUM;3423523432", ';');
+		}
+		else if (file.getContentType().equals("application/json")){
+			//System.out.println("hello jsonToTxt");
+			convert_to_delim.jsonToTxt(delim);
+
+		}
+		else {
+			//System.out.println("hello xmlToTxt");
+			convert_to_delim.xmlToTxt(delim);
+		}
+
 		mav.setViewName("home2");
-		mav.addObject("jsontext","Json text");
+		//mav.addObject("jsontext","Json text");
 		return mav;
 	}
 
