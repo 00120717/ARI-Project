@@ -36,8 +36,9 @@ public class clienteController {
 
     }
 
-    @Value("${jwt.secret}")
-    private String secret;
+    //@Value("${jwt.secret}")
+    private String secret = MainController.encriptKey;
+
 
     public String generateToken(Cliente cliente) {
 
