@@ -1,0 +1,18 @@
+[
+   {
+      "documento": "03423423",
+      "primer_nombre": "rober",
+      "apellido": "fuentes",
+      "credit_card": "04534534532",
+      "tipo": "GOLD",
+      "telefono": "2343243523"
+   },
+   {
+      "documento": "353452323",
+      "primer_nombre": "alberto",
+      "apellido": "alfaro",
+      "credit_card": "0534534523",
+      "tipo": "PLATINUM",
+      "telefono": "3423523432"
+   }
+]

@@ -16,6 +16,8 @@ import java.io.IOException;
 @Controller
 public class MainController {
 
+	static String flagFormatD = "none";
+
 	TxtToJson txtToJson = new TxtToJson();
 	TxtToXml txtToXml = new TxtToXml();
 	Convert_to_delim convert_to_delim = new Convert_to_delim();
@@ -47,6 +49,7 @@ public class MainController {
 		if (file.getContentType().equals("text/plain")){
 			if (formatTo.equals("xml")){
 				//System.out.println("hello txtToXml");
+				flagFormatD = "xml";
 				txtToXml.generate("03423423;rober;fuentes;04534534532;GOLD;2343243523\n" +
 						"353452323;alberto;alfaro;0534534523;PLATINUM;3423523432", ';');
 			}
@@ -54,19 +57,22 @@ public class MainController {
 				//System.out.println("hello txtToJson");
 				txtToJson.TextToJson("03423423;rober;fuentes;04534534532;GOLD;2343243523\n" +
 						"353452323;alberto;alfaro;0534534523;PLATINUM;3423523432", ';');
+			flagFormatD = "json";
 		}
 		else if (file.getContentType().equals("application/json")){
 			//System.out.println("hello jsonToTxt");
 			convert_to_delim.jsonToTxt(delim);
+			flagFormatD = "txt";
 
 		}
 		else {
 			//System.out.println("hello xmlToTxt");
 			convert_to_delim.xmlToTxt(delim);
+			flagFormatD = "txt";
 		}
 
 		mav.setViewName("home2");
-		//mav.addObject("jsontext","Json text");
+		mav.addObject("jsontext","Json text");
 		return mav;
 	}
 
