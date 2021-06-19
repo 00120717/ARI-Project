@@ -31,7 +31,7 @@
 			}
 		function chooseFormat(input){
 			let file = input.files[0];
-			console.log(file.type);
+			console.log(file.type +' == application/json');
 
 			if(file.type == 'text/plain'){
 				document.getElementById("txt").disabled = true;
@@ -40,13 +40,19 @@
 				document.getElementById("delimitadorDiv").hidden = true;
 			}
 			if(file.type == 'text/xml'){
+				document.getElementById("txt").checked = true;
+				document.getElementById("xml").checked = false;
+				document.getElementById("json").checked = false;
 				document.getElementById("txt").disabled = false;
 				document.getElementById("xml").disabled = true;
 				document.getElementById("json").disabled = true;
 				document.getElementById("delimitadorDiv").hidden = false;
 			}
-			if(file.type == 'text/json	'){
+			if(file.type == 'application/json'){
 				document.getElementById("txt").disabled = false;
+				document.getElementById("txt").checked = true;
+				document.getElementById("xml").checked = false;
+				document.getElementById("json").checked = false;
 				document.getElementById("xml").disabled = true;
 				document.getElementById("json").disabled = true;
 				document.getElementById("delimitadorDiv").hidden = false;
@@ -57,7 +63,7 @@
 		<div class="col-sm-6">
 			<div class="card">
 			<div class="card-body">
-				<form name="formulario" method="post" action="/" enctype="multipart/form-data">
+				<form name="formulario" method="post" action="/send" enctype="multipart/form-data">
 
 	  		<input type="file" name="adjunto" accept=".xml,.txt,.json" onchange='readFile(this,"textA_insert"),chooseFormat(this)' /><br>
 	  		<div class="row">
