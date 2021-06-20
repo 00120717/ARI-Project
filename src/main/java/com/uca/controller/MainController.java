@@ -1,6 +1,7 @@
 package com.uca.controller;
 
 import com.uca.convert.Convert_to_delim;
+import com.uca.domain.Cliente;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,8 @@ import com.uca.convert.TxtToJson;
 import com.uca.convert.TxtToXml;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -48,6 +51,12 @@ public class MainController {
 
         System.out.println(fileController.upload(file));
 
+
+        //convert_to_delim.readXML();
+        //List<Cliente> list_clientes = new ArrayList<>();
+        //list_clientes = Convert_to_delim.list_clientes;
+
+
         if (file.getContentType().equals("text/plain")) {
             if (formatTo.equals("xml")) {
                 //System.out.println("hello txtToXml");
@@ -56,9 +65,10 @@ public class MainController {
                         "353452323;alberto;alfaro;0534534523;PLATINUM;3423523432", ';');
             } else
                 //System.out.println("hello txtToJson");
+                flagFormatD = "json";
                 txtToJson.TextToJson("03423423;rober;fuentes;04534534532;GOLD;2343243523\n" +
                         "353452323;alberto;alfaro;0534534523;PLATINUM;3423523432", ';');
-            flagFormatD = "json";
+
         } else if (file.getContentType().equals("application/json")) {
             //System.out.println("hello jsonToTxt");
             convert_to_delim.jsonToTxt(delim);

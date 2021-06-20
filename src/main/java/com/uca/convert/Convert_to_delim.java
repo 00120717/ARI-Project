@@ -20,7 +20,7 @@ import org.json.simple.parser.ParseException;
  **/
 public class Convert_to_delim {
 
-    List<Cliente> list_clientes = new ArrayList<>();
+   public static List<Cliente> list_clientes = new ArrayList<>();
 
     /**
      * xml to txt
