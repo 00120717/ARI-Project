@@ -44,7 +44,8 @@ public class Convert_to_delim {
         try {
             SAXBuilder builder = new SAXBuilder();
             File xml = new File("src/main/resources/subidaArchivos/clientes.xml");
-
+            
+            
             Document document = builder.build(xml);
 
             Element root = document.getRootElement();

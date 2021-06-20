@@ -18,7 +18,7 @@ public class TxtToXml {
 	public void generate(String text, char delim) throws Exception{
 		
 		String [] cliente = text.split("\n");
-		System.out.println("TAMAÑO "+cliente.length);
+		
         if(cliente.length == 0){
             System.out.println("ERROR empty ArrayList");
             return;

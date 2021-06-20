@@ -25,7 +25,7 @@ public class FileController {
 
         // Ruta para guardar el archivo
         //String filePath = "/app/src/main/resources/pruebaArchivos/";
-        String filePath = "/Users/rober/IdeaProjects/ARI-Project/src/main/resources/subidaArchivos/";
+        String filePath = "C:/Users/Oscar Lovato/Documents/RIESGOS INFORMATICOS/ProyectoARI/ARI-Project/src/main/resources/descargaArchivos/";
 
         // Cambiar el nombre del archivo para evitar la duplicación
         fileName = filePath + fileName;
