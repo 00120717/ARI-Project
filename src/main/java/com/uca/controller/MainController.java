@@ -8,11 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import com.uca.convert.TxtToJson;
+
 import com.uca.convert.TxtToXml;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
@@ -29,6 +30,20 @@ public class MainController {
     textToJson textToJson = new textToJson();
 
     fileController fileController = new fileController();
+    
+    public String dataGenerated(String dir) throws Exception {
+    	
+    	String generated = "";
+        File fr=new File(dir);
+        BufferedReader br = new BufferedReader(new FileReader(fr));
+        String st;
+        while ((st = br.readLine()) != null) {
+          generated = generated + st + "\n";
+        }
+        br.close();
+
+    	return generated;
+    }
 
     @RequestMapping("/")
     public ModelAndView initMain() throws Exception {
@@ -64,57 +79,33 @@ public class MainController {
             if (formatTo.equals("xml")) {
                 //System.out.println("hello txtToXml");
                 flagFormatD = "xml";
-                txtToXml.generate("03423423;rober;fuentes;04534534532;GOLD;2343243523\n" +
-                        "353452323;alberto;alfaro;0534534523;PLATINUM;3423523432", ';');
+                txtToXml.generate(dataGenerated("src/main/resources/subidaArchivos/clientes.txt"), ';');
 
-                String generated = "";
-                File fr=new File("src/main/resources/descargaArchivos/clientes.xml");
-                BufferedReader br = new BufferedReader(new FileReader(fr));
-                String st;
-                while ((st = br.readLine()) != null) {
-                  generated = generated + st + "\n";
-                }
+                String generated = dataGenerated("src/main/resources/descargaArchivos/clientes.xml");
                 System.out.println("xml " + generated);
 
 
-            } if (formatTo.equals("json"))
+            } if (formatTo.equals("json")) {
                 //System.out.println("hello txtToJson");
-                txtToJson.TextToJson("03423423;rober;fuentes;04534534532;GOLD;2343243523\n" +
-                        "353452323;alberto;alfaro;0534534523;PLATINUM;3423523432", ';');
+                textToJson.TextToJson(dataGenerated("src/main/resources/subidaArchivos/clientes.txt"), ';');
             	flagFormatD = "json";
-            	String generated = "";
-            	File fr=new File("src/main/resources/descargaArchivos/clientes.json");
-                BufferedReader br = new BufferedReader(new FileReader(fr));
-                String st;
-                while ((st = br.readLine()) != null) {
-                  generated = generated + st + "\n";
-                }
+            	
+            	String generated = dataGenerated("src/main/resources/descargaArchivos/clientes.json");
                 System.out.println("json "  +generated);
+        }
 
         } else if (file.getContentType().equals("application/json")) {
             //System.out.println("hello jsonToTxt");
             convert_to_delim.jsonToTxt(delim);
             flagFormatD = "txt";
-            String generated = "";
-            File fr=new File("src/main/resources/descargaArchivos/clientes.txt");
-            BufferedReader br = new BufferedReader(new FileReader(fr));
-            String st;
-            while ((st = br.readLine()) != null) {
-              generated = generated + st + "\n";
-            }
+            String generated = dataGenerated("src/main/resources/descargaArchivos/clientes.txt");
             System.out.println("jtxt "+generated);
 
         } else {
             //System.out.println("hello xmlToTxt");
             convert_to_delim.xmlToTxt(delim);
             flagFormatD = "txt";
-            String generated = "";
-            File fr=new File("src/main/resources/descargaArchivos/clientes.txt");
-            BufferedReader br = new BufferedReader(new FileReader(fr));
-            String st;
-            while ((st = br.readLine()) != null) {
-              generated = generated + st + "\n";
-            }
+            String generated = dataGenerated("src/main/resources/descargaArchivos/clientes.txt");
             System.out.println("xtxt "+generated);
 
         }
