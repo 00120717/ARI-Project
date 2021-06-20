@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class MainController {
 
     static String flagFormatD = "none";
-    static String encriptKey = "none";
+    public static String encriptKey = "none";
 
     TxtToXml txtToXml = new TxtToXml();
     Convert_to_delim convert_to_delim = new Convert_to_delim();

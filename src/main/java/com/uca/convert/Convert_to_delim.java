@@ -5,7 +5,9 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.uca.controller.MainController;
 import com.uca.domain.Cliente;
+import com.uca.encryption.Vigenere;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -21,6 +23,7 @@ import org.json.simple.parser.ParseException;
 public class Convert_to_delim {
 
    public static List<Cliente> list_clientes = new ArrayList<>();
+   Vigenere vigenere = new Vigenere();
 
     /**
      * xml to txt
@@ -57,7 +60,7 @@ public class Convert_to_delim {
                 cliente.setDocumento(clienteaux.getChildTextTrim("documento"));
                 cliente.setPrimer_nombre(clienteaux.getChildTextTrim("primer_nombre"));
                 cliente.setApellido(clienteaux.getChildTextTrim("apellido"));
-                cliente.setCredit_card(clienteaux.getChildTextTrim("credit_card"));
+                cliente.setCredit_card(vigenere.cifra(clienteaux.getChildTextTrim("credit_card"), MainController.encriptKey));
                 cliente.setTipo(clienteaux.getChildTextTrim("tipo"));
                 cliente.setTelefono(clienteaux.getChildTextTrim("telefono"));
 
@@ -98,7 +101,7 @@ public class Convert_to_delim {
             BufferedWriter out = new BufferedWriter(new FileWriter("c:\\clientes.txt"));
             for (Cliente list_cliente : list_clientes) {
                 out.write(list_cliente.getDocumento() + delim + list_cliente.getPrimer_nombre() + delim + list_cliente.getApellido() + delim
-                        + list_cliente.getCredit_card() + delim + list_cliente.getTipo() + delim + list_cliente.getTelefono());
+                        + vigenere.descifra(list_cliente.getCredit_card(),MainController.encriptKey) + delim + list_cliente.getTipo() + delim + list_cliente.getTelefono());
                 out.newLine();
             }
             out.close();
