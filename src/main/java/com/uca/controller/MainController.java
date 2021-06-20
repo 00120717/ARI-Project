@@ -77,7 +77,7 @@ public class MainController {
 
                 String generated = dataGenerated("/app/src/main/resources/descargaArchivos/clientes.xml");
                 System.out.println("xml " + generated);
-
+                mav.addObject("textA_generated", generated);
 
             } if (formatTo.equals("json")) {
                 //System.out.println("hello txtToJson");
@@ -86,6 +86,7 @@ public class MainController {
             	
             	String generated = dataGenerated("/app/src/main/resources/descargaArchivos/clientes.json");
                 System.out.println("json "  +generated);
+                mav.addObject("textA_generated", generated);
         }
 
         } else if (file.getContentType().equals("application/json")) {
@@ -94,14 +95,14 @@ public class MainController {
             flagFormatD = "txt";
             String generated = dataGenerated("/app/src/main/resources/descargaArchivos/clientes.txt");
             System.out.println("jtxt "+generated);
-
+            mav.addObject("textA_generated", generated);
         } else {
             //System.out.println("hello xmlToTxt");
             convert_to_delim.xmlToTxt(delim);
             flagFormatD = "txt";
             String generated = dataGenerated("/app/src/main/resources/descargaArchivos/clientes.txt");
             System.out.println("xtxt "+generated);
-
+            mav.addObject("textA_generated", generated);
         }
 
         mav.setViewName("home2");
