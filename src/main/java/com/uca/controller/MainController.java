@@ -77,7 +77,9 @@ public class MainController {
 
                 String generated = dataGenerated("src/main/resources/descargaArchivos/clientes.xml");
                 System.out.println("xml " + generated);
+                mav.setViewName("home2");
                 mav.addObject("textA_generated", generated);
+
 
             } if (formatTo.equals("json")) {
                 //System.out.println("hello txtToJson");
