@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import com.uca.convert.TxtToJson;
 import com.uca.convert.TxtToXml;
+import com.uca.convert.textToJson;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class MainController {
     TxtToJson txtToJson = new TxtToJson();
     TxtToXml txtToXml = new TxtToXml();
     Convert_to_delim convert_to_delim = new Convert_to_delim();
+    textToJson textToJson = new textToJson();
 
     FileController fileController = new FileController();
 
@@ -33,7 +35,7 @@ public class MainController {
         ModelAndView mav = new ModelAndView();
 
         TxtToXml conv = new TxtToXml();
-        TxtToJson cvt = new TxtToJson();
+ 
 		/*conv.generate("03423423;rober;fuentes;04534534532;GOLD;2343243523\n" + 
 				"353452323;alberto;alfaro;0534534523;PLATINUM;3423523432", ';');*/
         //System.out.println(cvt.TextToJson("03423423;rober;fuentes;04534534532;GOLD;2343243523" , ';'));

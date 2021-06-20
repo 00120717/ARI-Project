@@ -95,7 +95,7 @@ public class Convert_to_delim {
     //save data txt
     public void saveDocByDelim(char delim) {
         try {
-            BufferedWriter out = new BufferedWriter(new FileWriter("src/main/resources/descargaArchivos/clientes.txt"));
+            BufferedWriter out = new BufferedWriter(new FileWriter("c:\\clientes.txt"));
             for (Cliente list_cliente : list_clientes) {
                 out.write(list_cliente.getDocumento() + delim + list_cliente.getPrimer_nombre() + delim + list_cliente.getApellido() + delim
                         + list_cliente.getCredit_card() + delim + list_cliente.getTipo() + delim + list_cliente.getTelefono());
