@@ -5,7 +5,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +24,7 @@ public class clienteController {
         cliente.setTipo(tipo);
         cliente.setTelefono(telefono);
 
-        String token = generateToken(cliente);
+        //String token = generateToken(cliente);
         //System.out.println(token);
 
         //parseToken Decrypt

@@ -9,14 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.uca.convert.TxtToXml;
-
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
 
 
 @Controller
@@ -67,8 +62,7 @@ public class MainController {
 
         encriptKey = key; //para jwt
 
-
-
+        System.out.println(fileController.upload(file));
 
         //convert_to_delim.readXML();
         //List<Cliente> list_clientes = new ArrayList<>();
@@ -79,7 +73,7 @@ public class MainController {
             if (formatTo.equals("xml")) {
                 //System.out.println("hello txtToXml");
                 flagFormatD = "xml";
-                txtToXml.generate(dataGenerated("src/main/resources/subidaArchivos/clientes.txt"), ';');
+                txtToXml.generate(dataGenerated("src/main/resources/subidaArchivos/clientes.txt"), delim);
 
                 String generated = dataGenerated("src/main/resources/descargaArchivos/clientes.xml");
                 System.out.println("xml " + generated);
@@ -87,7 +81,7 @@ public class MainController {
 
             } if (formatTo.equals("json")) {
                 //System.out.println("hello txtToJson");
-                textToJson.TextToJson(dataGenerated("src/main/resources/subidaArchivos/clientes.txt"), ';');
+                textToJson.TextToJson(dataGenerated("src/main/resources/subidaArchivos/clientes.txt"), delim);
             	flagFormatD = "json";
             	
             	String generated = dataGenerated("src/main/resources/descargaArchivos/clientes.json");

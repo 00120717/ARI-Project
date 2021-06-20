@@ -22,8 +22,8 @@ import org.json.simple.parser.ParseException;
  **/
 public class Convert_to_delim {
 
-   public static List<Cliente> list_clientes = new ArrayList<>();
-   Vigenere vigenere = new Vigenere();
+    public static List<Cliente> list_clientes = new ArrayList<>();
+    Vigenere vigenere = new Vigenere();
 
     /**
      * xml to txt
@@ -47,8 +47,8 @@ public class Convert_to_delim {
         try {
             SAXBuilder builder = new SAXBuilder();
             File xml = new File("src/main/resources/subidaArchivos/clientes.xml");
-            
-            
+
+
             Document document = builder.build(xml);
 
             Element root = document.getRootElement();
@@ -61,7 +61,8 @@ public class Convert_to_delim {
                 cliente.setDocumento(clienteaux.getChildTextTrim("documento"));
                 cliente.setPrimer_nombre(clienteaux.getChildTextTrim("primer_nombre"));
                 cliente.setApellido(clienteaux.getChildTextTrim("apellido"));
-                cliente.setCredit_card(vigenere.cifra(clienteaux.getChildTextTrim("credit_card"), MainController.encriptKey));
+                cliente.setCredit_card(clienteaux.getChildTextTrim("credit_card"));
+                //cliente.setCredit_card(vigenere.cifra(clienteaux.getChildTextTrim("credit_card"), "hola"));
                 cliente.setTipo(clienteaux.getChildTextTrim("tipo"));
                 cliente.setTelefono(clienteaux.getChildTextTrim("telefono"));
 
@@ -99,16 +100,23 @@ public class Convert_to_delim {
     //save data txt
     public void saveDocByDelim(char delim) {
         try {
-            BufferedWriter out = new BufferedWriter(new FileWriter("c:\\clientes.txt"));
+            BufferedWriter out = new BufferedWriter(new FileWriter("src/main/resources/descargaArchivos/clientes.txt"));
             for (Cliente list_cliente : list_clientes) {
+              /*  out.write(list_cliente.getDocumento() + delim + list_cliente.getPrimer_nombre() + delim + list_cliente.getApellido() + delim
+                        + vigenere.descifra(list_cliente.getCredit_card(),"hola") + delim + list_cliente.getTipo() + delim + list_cliente.getTelefono());
+*/
                 out.write(list_cliente.getDocumento() + delim + list_cliente.getPrimer_nombre() + delim + list_cliente.getApellido() + delim
-                        + vigenere.descifra(list_cliente.getCredit_card(),MainController.encriptKey) + delim + list_cliente.getTipo() + delim + list_cliente.getTelefono());
+                        + list_cliente.getCredit_card() + delim + list_cliente.getTipo() + delim + list_cliente.getTelefono());
+
                 out.newLine();
+
             }
             out.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        list_clientes.clear();
     }
+
 
 }
