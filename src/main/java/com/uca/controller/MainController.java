@@ -1,20 +1,13 @@
 package com.uca.controller;
 
 import com.uca.convert.Convert_to_delim;
-import com.uca.domain.Cliente;
-import org.json.simple.parser.ParseException;
+import com.uca.convert.TxtToXml;
+import com.uca.convert.textToJson;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import com.uca.convert.TxtToJson;
-import com.uca.convert.TxtToXml;
-import com.uca.convert.textToJson;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Controller
@@ -23,7 +16,6 @@ public class MainController {
     static String flagFormatD = "none";
     static String encriptKey = "none";
 
-    TxtToJson txtToJson = new TxtToJson();
     TxtToXml txtToXml = new TxtToXml();
     Convert_to_delim convert_to_delim = new Convert_to_delim();
     textToJson textToJson = new textToJson();
@@ -68,8 +60,8 @@ public class MainController {
             } else
                 //System.out.println("hello txtToJson");
                 flagFormatD = "json";
-                txtToJson.TextToJson("03423423;rober;fuentes;04534534532;GOLD;2343243523\n" +
-                        "353452323;alberto;alfaro;0534534523;PLATINUM;3423523432", ';');
+                textToJson.TextToJson("03423423;rober;fuentes;04534534532;GOLD;2343243523\n" +
+                    "353452323;alberto;alfaro;0534534523;PLATINUM;3423523432", ';');
 
         } else if (file.getContentType().equals("application/json")) {
             //System.out.println("hello jsonToTxt");
