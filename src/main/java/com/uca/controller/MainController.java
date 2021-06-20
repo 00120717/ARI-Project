@@ -20,7 +20,7 @@ public class MainController {
     Convert_to_delim convert_to_delim = new Convert_to_delim();
     textToJson textToJson = new textToJson();
 
-    FileController fileController = new FileController();
+    fileController fileController = new fileController();
 
     @RequestMapping("/")
     public ModelAndView initMain() throws Exception {

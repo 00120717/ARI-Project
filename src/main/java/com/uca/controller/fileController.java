@@ -12,7 +12,7 @@ import java.io.OutputStream;
 
 @Controller
 //@RequestMapping("/file/")
-public class FileController {
+public class fileController {
     //  @RequestMapping("upload")
     //@ResponseBody
     public String upload(MultipartFile file) {
