@@ -47,7 +47,7 @@ public class textToJson {
 		
 		try {
 			// Writing to a file   
-	        mapper.writeValue(new File("src/main/resources/descargaArchivos/clientes.json"), list_clientes );
+	        mapper.writeValue(new File("/app/src/main/resources/descargaArchivos/clientes.json"), list_clientes );
         } catch (IOException e) {
             e.printStackTrace();
         } 

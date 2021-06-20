@@ -46,7 +46,7 @@ public class Convert_to_delim {
     public void readXML() {
         try {
             SAXBuilder builder = new SAXBuilder();
-            File xml = new File("src/main/resources/subidaArchivos/clientes.xml");
+            File xml = new File("/app/src/main/resources/subidaArchivos/clientes.xml");
 
 
             Document document = builder.build(xml);
@@ -79,7 +79,7 @@ public class Convert_to_delim {
 
         JSONParser parser = new JSONParser();
         JSONArray jsonArray = (JSONArray) parser.parse(new FileReader(
-                "src/main/resources/subidaArchivos/clientes.json"));
+                "/app/src/main/resources/subidaArchivos/clientes.json"));
 
         for (Object o : jsonArray) {
             JSONObject person = (JSONObject) o;
@@ -100,7 +100,7 @@ public class Convert_to_delim {
     //save data txt
     public void saveDocByDelim(char delim) {
         try {
-            BufferedWriter out = new BufferedWriter(new FileWriter("src/main/resources/descargaArchivos/clientes.txt"));
+            BufferedWriter out = new BufferedWriter(new FileWriter("/app/src/main/resources/descargaArchivos/clientes.txt"));
             for (Cliente list_cliente : list_clientes) {
               /*  out.write(list_cliente.getDocumento() + delim + list_cliente.getPrimer_nombre() + delim + list_cliente.getApellido() + delim
                         + vigenere.descifra(list_cliente.getCredit_card(),"hola") + delim + list_cliente.getTipo() + delim + list_cliente.getTelefono());
