@@ -16,7 +16,7 @@ import java.io.FileReader;
 
 @Controller
 public class MainController {
-
+	public static String generatedFile = "";
     static String flagFormatD = "none";
     public static String encriptKey = "none";
 
@@ -73,20 +73,22 @@ public class MainController {
             if (formatTo.equals("xml")) {
                 //System.out.println("hello txtToXml");
                 flagFormatD = "xml";
-                txtToXml.generate(dataGenerated("src/main/resources/subidaArchivos/clientes.txt"), delim);
+                txtToXml.generate(dataGenerated("C:/Users/Marvin Ramirez/Documents/GitHub/ARI-Project/src/main/resources/subidaArchivos/clientes.txt"), delim);
 
-                String generated = dataGenerated("src/main/resources/descargaArchivos/clientes.xml");
+                String generated = dataGenerated("C:/Users/Marvin Ramirez/Documents/GitHub/ARI-Project/src/main/resources/descargaArchivos/clientes.xml");
                 System.out.println("xml " + generated);
+                generatedFile = generated;
                 mav.addObject("textA_generated", generated);
 
 
             } if (formatTo.equals("json")) {
                 //System.out.println("hello txtToJson");
-                textToJson.TextToJson(dataGenerated("src/main/resources/subidaArchivos/clientes.txt"), delim);
+                textToJson.TextToJson(dataGenerated("C:/Users/Marvin Ramirez/Documents/GitHub/ARI-Project/src/main/resources/subidaArchivos/clientes.txt"), delim);
             	flagFormatD = "json";
             	
-            	String generated = dataGenerated("src/main/resources/descargaArchivos/clientes.json");
+            	String generated = dataGenerated("C:/Users/Marvin Ramirez/Documents/GitHub/ARI-Project/src/main/resources/descargaArchivos/clientes.json");
                 System.out.println("json "  +generated);
+                generatedFile = generated;
                 mav.addObject("textA_generated", generated);
         }
 
@@ -94,22 +96,25 @@ public class MainController {
             //System.out.println("hello jsonToTxt");
             convert_to_delim.jsonToTxt(delim);
             flagFormatD = "txt";
-            String generated = dataGenerated("src/main/resources/descargaArchivos/clientes.txt");
+            String generated = dataGenerated("C:/Users/Marvin Ramirez/Documents/GitHub/ARI-Project/src/main/resources/descargaArchivos/clientes.txt");
             System.out.println("jtxt "+generated);
+            generatedFile = generated;
             mav.addObject("textA_generated", generated);
 
         } else {
             //System.out.println("hello xmlToTxt");
             convert_to_delim.xmlToTxt(delim);
             flagFormatD = "txt";
-            String generated = dataGenerated("src/main/resources/descargaArchivos/clientes.txt");
+            String generated = dataGenerated("C:/Users/Marvin Ramirez/Documents/GitHub/ARI-Project/src/main/resources/descargaArchivos/clientes.txt");
             System.out.println("xtxt "+generated);
+            generatedFile = generated;
             mav.addObject("textA_generated", generated);
 
         }
-
+        System.out.println("home2");
         mav.setViewName("home2");
-        mav.addObject("jsontext", "Json text");
+        mav.addObject("gen", generatedFile);
+        
         return mav;
     }
 

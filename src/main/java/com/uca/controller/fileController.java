@@ -25,7 +25,7 @@ public class fileController {
 
         // Ruta para guardar el archivo
         //String filePath = "/app/src/main/resources/pruebaArchivos/";
-        String filePath = "/Users/rober/IdeaProjects/ARI-Project/src/main/resources/subidaArchivos/";
+        String filePath = "C:/Users/Marvin Ramirez/Documents/GitHub/ARI-Project/src/main/resources/subidaArchivos/";
 
         // Cambiar el nombre del archivo para evitar la duplicación
         fileName = filePath + fileName;
@@ -57,13 +57,13 @@ public class fileController {
 
         switch (MainController.flagFormatD) {
             case "txt":
-                file = new File("src/main/resources/descargaArchivos/clientes.txt");
+                file = new File("C:/Users/Marvin Ramirez/Documents/GitHub/ARI-Project/src/main/resources/descargaArchivos/clientes.txt");
                 break;
             case "xml":
-                file = new File("src/main/resources/descargaArchivos/clientes.xml");
+                file = new File("C:/Users/Marvin Ramirez/Documents/GitHub/ARI-Project/src/main/resources/descargaArchivos/clientes.xml");
                 break;
             case "json":
-                file = new File("src/main/resources/descargaArchivos/clientes.json");
+                file = new File("C:/Users/Marvin Ramirez/Documents/GitHub/ARI-Project/src/main/resources/descargaArchivos/clientes.json");
                 break;
             default:
                 System.out.println("Not Found File");
