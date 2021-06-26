@@ -17,6 +17,7 @@ import java.io.FileReader;
 @Controller
 public class MainController {
 
+    public static String generatedFile = "";
     static String flagFormatD = "none";
     public static String encriptKey = "none";
 
@@ -25,19 +26,19 @@ public class MainController {
     textToJson textToJson = new textToJson();
 
     fileController fileController = new fileController();
-    
+
     public String dataGenerated(String dir) throws Exception {
-    	
-    	String generated = "";
-        File fr=new File(dir);
+
+        String generated = "";
+        File fr = new File(dir);
         BufferedReader br = new BufferedReader(new FileReader(fr));
         String st;
         while ((st = br.readLine()) != null) {
-          generated = generated + st + "\n";
+            generated = generated + st + "\n";
         }
         br.close();
 
-    	return generated;
+        return generated;
     }
 
     @RequestMapping("/")
@@ -45,10 +46,6 @@ public class MainController {
         ModelAndView mav = new ModelAndView();
 
         TxtToXml conv = new TxtToXml();
-
-		/*conv.generate("03423423;rober;fuentes;04534534532;GOLD;2343243523\n" +
-				"353452323;alberto;alfaro;0534534523;PLATINUM;3423523432", ';');*/
-        //System.out.println(cvt.TextToJson("03423423;rober;fuentes;04534534532;GOLD;2343243523" , ';'));
 
         mav.setViewName("home2");
         return mav;
@@ -58,15 +55,10 @@ public class MainController {
     @RequestMapping("/send")
     public ModelAndView formTextJson(@RequestParam(value = "adjunto") MultipartFile file, @RequestParam(value = "format") String formatTo, @RequestParam(value = "delimitador") char delim, @RequestParam(value = "Llave") String key) throws Exception {
         ModelAndView mav = new ModelAndView();
-        //	System.out.println(format.getContentType() + " " + formatTo );
 
         encriptKey = key; //para jwt
 
-        System.out.println(fileController.upload(file));
-
-        //convert_to_delim.readXML();
-        //List<Cliente> list_clientes = new ArrayList<>();
-        //list_clientes = Convert_to_delim.list_clientes;
+        //System.out.println(fileController.upload(file));
 
 
         if (file.getContentType().equals("text/plain")) {
@@ -77,26 +69,30 @@ public class MainController {
 
                 String generated = dataGenerated("src/main/resources/descargaArchivos/clientes.xml");
                 System.out.println("xml " + generated);
+                generatedFile = generated;
                 mav.setViewName("home2");
                 mav.addObject("textA_generated", generated);
 
 
-            } if (formatTo.equals("json")) {
+            }
+            if (formatTo.equals("json")) {
                 //System.out.println("hello txtToJson");
                 textToJson.TextToJson(dataGenerated("src/main/resources/subidaArchivos/clientes.txt"), delim);
-            	flagFormatD = "json";
-            	
-            	String generated = dataGenerated("src/main/resources/descargaArchivos/clientes.json");
-                System.out.println("json "  +generated);
+                flagFormatD = "json";
+
+                String generated = dataGenerated("src/main/resources/descargaArchivos/clientes.json");
+                System.out.println("json " + generated);
+                generatedFile = generated;
                 mav.addObject("textA_generated", generated);
-        }
+            }
 
         } else if (file.getContentType().equals("application/json")) {
             //System.out.println("hello jsonToTxt");
             convert_to_delim.jsonToTxt(delim);
             flagFormatD = "txt";
             String generated = dataGenerated("src/main/resources/descargaArchivos/clientes.txt");
-            System.out.println("jtxt "+generated);
+            System.out.println("jtxt " + generated);
+            generatedFile = generated;
             mav.addObject("textA_generated", generated);
 
         } else {
@@ -104,12 +100,13 @@ public class MainController {
             convert_to_delim.xmlToTxt(delim);
             flagFormatD = "txt";
             String generated = dataGenerated("src/main/resources/descargaArchivos/clientes.txt");
-            System.out.println("xtxt "+generated);
+            System.out.println("xtxt " + generated);
+            generatedFile = generated;
             mav.addObject("textA_generated", generated);
 
         }
-        mav.addObject("textA_generated", "Json text");
         mav.setViewName("home2");
+        mav.addObject("gen", generatedFile);
 
 
         return mav;

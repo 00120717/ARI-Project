@@ -8,6 +8,9 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+
+import com.uca.controller.MainController;
+import com.uca.encryption.Vigenere;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -15,6 +18,9 @@ import org.w3c.dom.Text;
 
 
 public class TxtToXml {
+
+    Vigenere  vigenere = new Vigenere();
+
 	public void generate(String text, char delim) throws Exception{
 		
 		String [] cliente = text.split("\n");
@@ -53,7 +59,7 @@ public class TxtToXml {
                 apellidoNode.appendChild(nodeApellidoValue);
                 
                 Element cardNode = document.createElement("credit_card");
-                Text nodeCardValue = document.createTextNode(c[j+3]);                
+                Text nodeCardValue = document.createTextNode(vigenere.cifra(c[j+3], MainController.encriptKey));
                 cardNode.appendChild(nodeCardValue);
                 
                 Element tipoNode = document.createElement("tipo"); 

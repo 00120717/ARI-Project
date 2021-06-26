@@ -1,11 +1,5 @@
 package com.uca.convert;
 
-import java.io.*;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import com.uca.controller.MainController;
 import com.uca.domain.Cliente;
 import com.uca.encryption.Vigenere;
 import org.jdom2.Document;
@@ -16,6 +10,12 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * xml/json to txt
@@ -102,9 +102,6 @@ public class Convert_to_delim {
         try {
             BufferedWriter out = new BufferedWriter(new FileWriter("src/main/resources/descargaArchivos/clientes.txt"));
             for (Cliente list_cliente : list_clientes) {
-              /*  out.write(list_cliente.getDocumento() + delim + list_cliente.getPrimer_nombre() + delim + list_cliente.getApellido() + delim
-                        + vigenere.descifra(list_cliente.getCredit_card(),"hola") + delim + list_cliente.getTipo() + delim + list_cliente.getTelefono());
-*/
                 out.write(list_cliente.getDocumento() + delim + list_cliente.getPrimer_nombre() + delim + list_cliente.getApellido() + delim
                         + list_cliente.getCredit_card() + delim + list_cliente.getTipo() + delim + list_cliente.getTelefono());
 

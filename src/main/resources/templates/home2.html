@@ -142,7 +142,7 @@
 					Archivo Generado
 				</span>
 			<div class="wrap-input100" >
-				<textarea type="text" id="textA_generated" name="textA_generated" class="input100" style="height: 10em;" disabled="disabled" placeholder="Vista Previa no disponible, para ver el archivo presione descargar "></textarea>
+				<textarea name="textA_generated" th:text="${gen}" class="input100" style="height: 10em;" disabled="disabled"></textarea>
 			</div>
 			<div class="container-login100-form-btn m-t-17">
 				<button class="login100-form-btn"  th:onclick="|window.location.href='/download'|"> DESCARGAR</button><br>

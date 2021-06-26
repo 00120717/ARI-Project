@@ -1,18 +1,20 @@
 package com.uca.convert;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonSyntaxException;
+import com.uca.controller.clienteController;
+import com.uca.domain.Cliente;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonSyntaxException;
-import com.uca.domain.Cliente;
-
 public class textToJson {
-	List<Cliente> list_clientes = new ArrayList<>();
+	List<String> list_clientes = new ArrayList<>();
+	List<Cliente> list_clientesC = new ArrayList<>();
+	clienteController clienteController = new clienteController();
+
 	public void TextToJson(String text, char delim) throws JsonSyntaxException{
 		
 		String[] parts = text.split("\n");
@@ -34,20 +36,23 @@ public class textToJson {
 			 cliente.setCredit_card(c[j+3]);
 			 cliente.setTipo(c[j+4]);
 			 cliente.setTelefono(c[j+5]);
-			 
-			 list_clientes.add(cliente);
+
+			 list_clientes.add(clienteController.generateToken(cliente));
 			 j = 0;
 		}
 		
 		String jsonR = "[" + json + "]";
-		
-		//JsonArray jsonObject = new JsonParser().parse(jsonR).getAsJsonArray();
-		
+
 		ObjectMapper mapper = new ObjectMapper();
 		
 		try {
+			//listString to listCliente
+			for (String list_cliente : list_clientes) {
+				list_clientesC.add(clienteController.parseToken(list_cliente));
+			}
+
 			// Writing to a file   
-	        mapper.writeValue(new File("src/main/resources/descargaArchivos/clientes.json"), list_clientes );
+	        mapper.writeValue(new File("src/main/resources/descargaArchivos/clientes.json"), list_clientesC );
         } catch (IOException e) {
             e.printStackTrace();
         } 

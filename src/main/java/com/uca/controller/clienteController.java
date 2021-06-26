@@ -24,19 +24,11 @@ public class clienteController {
         cliente.setTipo(tipo);
         cliente.setTelefono(telefono);
 
-        //String token = generateToken(cliente);
-        //System.out.println(token);
-
-        //parseToken Decrypt
-        //System.out.println(parseToken(token).getDocumento());
-
-
         return cliente;
 
     }
 
-    //@Value("${jwt.secret}")
-    private String secret = MainController.encriptKey;
+    private final String secret = MainController.encriptKey;
 
 
     public String generateToken(Cliente cliente) {

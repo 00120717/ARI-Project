@@ -11,10 +11,8 @@ import java.io.FileInputStream;
 import java.io.OutputStream;
 
 @Controller
-//@RequestMapping("/file/")
 public class fileController {
-    //  @RequestMapping("upload")
-    //@ResponseBody
+
     public String upload(MultipartFile file) {
         // Obtén el nombre original
         String fileName = file.getOriginalFilename();
@@ -68,13 +66,13 @@ public class fileController {
             default:
                 System.out.println("Not Found File");
         }
-        //File file = new File("/app/src/main/resources/pruebaArchivos/file.txt");
+
         // Llevando objeto de entrada
         FileInputStream fis = new FileInputStream(file);
         // Establecer el formato relevante
         response.setContentType("application/force-download");
         // Establecer el nombre y el encabezado del archivo descargado
-       // response.addHeader("Content-disposition", "attachment;fileName=" + "a.txt");
+        // response.addHeader("Content-disposition", "attachment;fileName=" + "a.txt");
 
         switch (MainController.flagFormatD) {
             case "txt":
@@ -100,8 +98,7 @@ public class fileController {
             os.write(buf, 0, len);
         }
         fis.close();
-        //mav.setViewName("home2");
-        //return mav;
+
     }
 
 
