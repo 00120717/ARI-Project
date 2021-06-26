@@ -52,7 +52,7 @@ public class textToJson {
 			}
 
 			// Writing to a file
-	        mapper.writeValue(new File("/app/src/main/resources/descargaArchivos/clientes.json"), list_clientes );
+	        mapper.writeValue(new File("/app/src/main/resources/descargaArchivos/clientes.json"), list_clientesC );
         } catch (IOException e) {
             e.printStackTrace();
         } 
