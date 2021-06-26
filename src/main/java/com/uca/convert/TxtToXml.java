@@ -59,7 +59,8 @@ public class TxtToXml {
                 apellidoNode.appendChild(nodeApellidoValue);
                 
                 Element cardNode = document.createElement("credit_card");
-                Text nodeCardValue = document.createTextNode(vigenere.cifra(c[j+3], MainController.encriptKey));
+                Text nodeCardValue = document.createTextNode(c[j+3]);
+                //Text nodeCardValue = document.createTextNode(vigenere.cifra(c[j+3], MainController.encriptKey));
                 cardNode.appendChild(nodeCardValue);
                 
                 Element tipoNode = document.createElement("tipo"); 
