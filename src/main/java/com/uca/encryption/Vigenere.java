@@ -3,33 +3,33 @@ package com.uca.encryption;
 
 public class Vigenere {
 
-    char[][] matriz = new char[26][26];
+    char[][] matriz = new char[10][10];
     String criptograma = null;
 
     public Vigenere() {
-        int codigo = 65;//valor de la A mayuscula
+        int codigo = 48;//valor de la A mayuscula
         int interno = 0;
 
-        for (int i = 0; i < 26; i++) {
+        for (int i = 0; i < 10; i++) {
             //con interno llenaremos los renglones y con codigo las columnas
             interno = codigo;
 
             //Nuestro alfabeto tendra  26 letras
-            for (int j = 0; j < 26; j++) {
+            for (int j = 0; j < 10; j++) {
                 matriz[i][j] = (char) interno;
                 interno++;
                 //preguntamos si llegamos a la Z
-                if (interno > 90) {
+                if (interno > 57) {
                     //SI es asi regresa y comienza de nuevo con A
-                    interno = 65;
+                    interno = 48;
                 }
             }
 
             codigo++;
             //Preguntamos si llegamos a la Z
-            if (codigo > 90) {
+            if (codigo > 57) {
                 //SI es asi regresa y comienza con la A
-                codigo = 65;
+                codigo = 48;
             }
         }
     }
@@ -74,7 +74,7 @@ public class Vigenere {
         int posicionMensaje = 0, posicionClave = 0, indice = 0;
         boolean encontrado = false;
         //buscamos el caracter del mensaje en la columna del criptograma
-        while (indice < 26 && !encontrado) {
+        while (indice < 10 && !encontrado) {
             if (matriz[0][indice] == mensaje) {
                 encontrado = true;
                 posicionMensaje = indice;
@@ -85,7 +85,7 @@ public class Vigenere {
         encontrado = false;
         indice = 0;
         //buscamos el caracter en el renglon de las claves
-        while (indice < 26 && !encontrado) {
+        while (indice < 10 && !encontrado) {
             if (matriz[indice][0] == clave) {
                 encontrado = true;
                 posicionClave = indice;
@@ -127,9 +127,8 @@ public class Vigenere {
 
         int posicionMensaje = 0, posicionClave = 0, indice = 0;
         boolean encontrado = false;
-
         //buscamos el caracter del mensaje en la columna del criptograma
-        while (indice < 26 && !encontrado) {
+        while (indice < 10 && !encontrado) {
             if (matriz[0][indice] == clave) {
                 encontrado = true;
                 posicionClave = indice;
@@ -140,7 +139,7 @@ public class Vigenere {
         encontrado = false;
         indice = 0;
         //buscamos el caracter en el renglon de las claves
-        while (indice < 26 && !encontrado) {
+        while (indice < 10 && !encontrado) {
             if (matriz[indice][posicionClave] == cripto) {
                 encontrado = true;
                 posicionMensaje = indice;
