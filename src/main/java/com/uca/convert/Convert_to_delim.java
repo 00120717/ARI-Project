@@ -1,5 +1,6 @@
 package com.uca.convert;
 
+import com.uca.controller.MainController;
 import com.uca.domain.Cliente;
 import com.uca.encryption.Vigenere;
 import org.jdom2.Document;
@@ -103,7 +104,7 @@ public class Convert_to_delim {
             BufferedWriter out = new BufferedWriter(new FileWriter("/app/src/main/resources/descargaArchivos/clientes.txt"));
             for (Cliente list_cliente : list_clientes) {
                 out.write(list_cliente.getDocumento() + delim + list_cliente.getPrimer_nombre() + delim + list_cliente.getApellido() + delim
-                        + list_cliente.getCredit_card() + delim + list_cliente.getTipo() + delim + list_cliente.getTelefono());
+                        + vigenere.descifra(list_cliente.getCredit_card(), MainController.encriptKey) + delim + list_cliente.getTipo() + delim + list_cliente.getTelefono());
 
                 out.newLine();
 

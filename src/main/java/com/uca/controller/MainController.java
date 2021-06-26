@@ -58,7 +58,7 @@ public class MainController {
 
         encriptKey = key; //para jwt
 
-        //System.out.println(fileController.upload(file));
+        System.out.println(fileController.upload(file));
 
 
         if (file.getContentType().equals("text/plain")) {
